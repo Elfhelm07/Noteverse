@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Data</title>
+</head>
+<body>
+  <h1>Library Data</h1>
+  <div id="library-data"></div>
+
+  <script>
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://cops-demo.slucas.fr/feed.php', true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const xmlData = xhr.responseXML;
+        const libraryData = xmlData.getElementsByTagName('library')[0];
+        const books = libraryData.getElementsByTagName('book');
+
+        let html = '';
+        for (let i = 0; i < books.length; i++) {
+          const book = books[i];
+          const title = book.getElementsByTagName('title')[0].textContent;
+          const author = book.getElementsByTagName('author')[0].textContent;
+          html += `<p>Book: ${title} by ${author}</p>`;
+        }
+
+        document.getElementById('library-data').innerHTML = html;
+      }
+    };
+    xhr.send();
+  </script>
+</body>
+</html>

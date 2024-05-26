@@ -1,0 +1,151 @@
+import React from 'react';
+import './style.css';
+import penImage from './images/pen.png';
+import gifImage from './images/Untitled design(1).gif';
+import gifImage2 from './images/Untitled design.gif';
+import dashboardImage from './images/dashboard_12177001.png';
+import deviceImage from './images/device1.png';
+import img2 from './images/img2.png';
+import book2 from './images/book2.png';
+import gifImage3 from './images/gif2.gif';
+import contactUsImage from './images/contactus.png';
+import socialMedia1 from './images/social-media_13716973.png';
+import socialMedia2 from './images/social-media_13716962.png';
+import cameraImage from './images/camera_8466655.png';
+
+const Navbar = () => (
+  <nav>
+    <div className="navbar-menu">
+      <ul className="navbar">
+        <li><a href="">Home</a></li>
+        <li><a href="#about-us">About Us</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="dashboard1.html">Library</a></li>
+      </ul>
+    </div>
+    <div className="menu-icon">
+      <div className="bar"></div>
+      <div className="bar"></div>
+      <div className="bar"></div>
+    </div>
+    <div className="buttons">
+      <button onClick={() => window.location.href='login.html'}>Login</button>
+      <button onClick={() => window.location.href='signUp.html'}>SignUp</button>
+    </div>
+  </nav>
+);
+
+const Header = () => (
+  <header>
+    <div className="header-content">
+      <h1>NOTEVERSE<span><img src={penImage} alt="Pen"/></span></h1>
+      <h3>Read With Ease</h3>
+      <button>Learn More</button>
+    </div>
+    <div className="header-name">
+      <img src={gifImage} alt="Header GIF"/>
+    </div>
+  </header>
+);
+
+const AboutUs = () => (
+  <section id="about-us" className="content-section">
+    <div className="image-div">
+      <img src={gifImage2} alt="GIF"/>
+    </div>
+    <div className="text-div">
+      <img src={dashboardImage} alt="Dashboard"/>
+      <p>Experience the transformative power of our platform, dedicated to simplifying your reading journey. Bid farewell to scattered documents as we seamlessly organize your reading materials, ensuring they're always at your fingertips. With centralized
+        document storage, seamless synchronization, and intuitive annotation tools, unlock the full potential of your reading experience, anytime, anywhere.</p>
+    </div>
+  </section>
+);
+
+const ServiceCard = ({ image, title, text }) => (
+  <div className="card">
+    <img src={image} alt={title}/>
+    <h4 style={{textAlign: 'center', color: '#8C52FF'}}>{title}</h4>
+    <div className="card-text">
+      <p style={{fontSize: '1.2rem'}}>{text}</p>
+    </div>
+  </div>
+);
+
+const Services = () => (
+  <section className="card-3" id="service">
+    <h1 style={{textAlign: 'center', color: '#8C52FF', fontSize: '2.5rem', marginTop: '20px'}}>What's Inside?</h1>
+    <div className="card-container">
+      <ServiceCard 
+        image={deviceImage} 
+        title="ANY DEVICE" 
+        text="Read your eBooks on any device! With our beautifully designed apps for Android, iOS and Web, we give you the freedom of reading on any device wherever life takes you." 
+      />
+      <ServiceCard 
+        image={img2} 
+        title="Organize and manage your ebooks" 
+        text="Your digital library is now at your fingertips. Organize eBooks by author, genre and custom tags to find the perfect book with ease!" 
+      />
+      <ServiceCard 
+        image={book2} 
+        title="PICK WHERE YOU LEFT" 
+        text="Continue exactly where you left off when you switch devices. Never lose track of your reading progress." 
+      />
+    </div>
+  </section>
+);
+
+const ContentSection = ({ image, title, text }) => (
+  <section className="content-section">
+    <div className="text-div">
+      <img src={image} alt="Dashboard"/>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div className="image-div">
+      <img src={gifImage3} alt="GIF"/>
+    </div>
+  </section>
+);
+
+const ContactUs = () => (
+  <section className="content-section" id="contact-us">
+    <div className="contact-image">
+      <img src={contactUsImage} alt="Contact Us Image"/>
+    </div>
+    <div className="contact-content">
+      <h2>Contact Us</h2>
+      <h3>Phone</h3>
+      <p>+1 123-456-7890</p>
+      <h3>Email</h3>
+      <p>info@example.com</p>
+      <h3>Social</h3>
+      <p>
+        <img src={socialMedia1} alt=""/>
+        <img src={socialMedia2} alt=""/>
+        <img src={cameraImage} alt=""/>
+      </p>
+    </div>
+  </section>
+);
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <section>
+        <Header />
+      </section>
+      <AboutUs />
+      <Services />
+      <ContentSection 
+        image={dashboardImage} 
+        title="We'll help perfect your business model: Optimizing Strategies for Success" 
+        text="Elevate your reading experience with our platform's unique offerings. Dive into personalized reading recommendations tailored to your interests and preferences. Unlock valuable insights from your documents through AI-powered analysis. Collaborate seamlessly
+        with others in shared reading spaces. And organize your collection effortlessly with our integrated virtual bookshelf. Experience the future of reading, tailored to you."
+      />
+      <ContactUs />
+    </div>
+  );
+}
+
+export default App;

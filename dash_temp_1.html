@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Catalog</title>
+<style>
+  /* Define CSS styles for book display */
+  .book {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+  }
+  .book img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+<div id="bookContainer"></div>
+
+<script>
+// Fetch book data from the Calibre OPDS server
+fetch('http://192.168.1.3:8084/opds') // Update with your Calibre server URL
+  .then(response => response.text())
+  .then(data => {
+    // Parse the OPDS XML data
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(data, 'application/xml');
+    
+    // Extract book information
+    const entries = xmlDoc.getElementsByTagName('entry');
+    const bookContainer = document.getElementById('bookContainer');
+    
+    // Loop through each book entry and display information
+    for (let entry of entries) {
+      const title = entry.getElementsByTagName('title')[0].textContent;
+      const author = entry.getElementsByTagName('author')[0].getElementsByTagName('name')[0].textContent;
+      const coverUrl = entry.getElementsByTagName('link')[1].getAttribute('href');
+      
+      // Create HTML elements for each book
+      const bookDiv = document.createElement('div');
+      bookDiv.classList.add('book');
+      const titlePara = document.createElement('p');
+      titlePara.textContent = title;
+      const authorPara = document.createElement('p');
+      authorPara.textContent = author;
+      const coverImg = document.createElement('img');
+      coverImg.src = coverUrl;
+      
+      // Append elements to the book container
+      bookDiv.appendChild(coverImg);
+      bookDiv.appendChild(titlePara);
+      bookDiv.appendChild(authorPara);
+      bookContainer.appendChild(bookDiv);
+    }
+  })
+  .catch(error => console.error('Error fetching book data:', error));
+</script>
+</body>
+</html>

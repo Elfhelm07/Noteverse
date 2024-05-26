@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books from Calibre OPDS</title>
+</head>
+<body>
+    <h1>Books from Calibre OPDS</h1>
+    <div id="booksContainer"></div>
+
+    <script>
+        // Function to fetch book data from the Calibre OPDS server
+        function fetchBooks() {
+            fetch('http://192.168.1.3:8084')
+                .then(response => response.json())
+                .then(data => {
+                    const booksContainer = document.getElementById('booksContainer');
+                    // Clear previous content
+                    booksContainer.innerHTML = '';
+                    // Iterate through each book and create HTML elements to display book information
+                    data.books.forEach(book => {
+                        const bookDiv = document.createElement('div');
+                        const title = document.createElement('h2');
+                        title.textContent = book.title;
+                        const author = document.createElement('p');
+                        author.textContent = 'Author: ' + book.author;
+                        const image = document.createElement('img');
+                        image.src = book.image;
+                        image.alt = book.title;
+                        bookDiv.appendChild(title);
+                        bookDiv.appendChild(author);
+                        bookDiv.appendChild(image);
+                        booksContainer.appendChild(bookDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching books:', error));
+        }
+
+        // Fetch books when the page loads
+        fetchBooks();
+    </script>
+</body>
+</html>
